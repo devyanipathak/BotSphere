@@ -5,10 +5,6 @@ It simulates how modern automated warehouses monitor robots, assign tasks, proce
 
 This project demonstrates **frontend system design, real-time UI updates, state management, data visualization, and interactive UI/UX** using modern React tools.
 
----
-
-## 🔗 Live Demo
-> (Add your deployed link here once deployed)
 
 ---
 
