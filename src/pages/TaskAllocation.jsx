@@ -13,20 +13,40 @@ export default function TaskAllocation() {
   });
 
   const [success, setSuccess] = useState(false);
+  const [errors, setErrors] = useState({});
 
-  const handleChange = (e) =>
+  const handleChange = (e) => {
     setForm({ ...form, [e.target.name]: e.target.value });
+    setErrors({ ...errors, [e.target.name]: "" });
+  };
+
+  const validate = () => {
+    const newErrors = {};
+
+    if (!form.pickup.trim()) newErrors.pickup = "Pickup location is required";
+    if (!form.drop.trim()) newErrors.drop = "Drop location is required";
+    if (!form.priority) newErrors.priority = "Priority is required";
+
+    setErrors(newErrors);
+    return Object.keys(newErrors).length === 0;
+  };
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    if (!form.pickup || !form.drop) return;
+
+    if (!validate()) return;
 
     dispatch(addTask(form));
     setSuccess(true);
 
     setTimeout(() => setSuccess(false), 2000);
 
-    setForm({ pickup: "", drop: "", priority: "medium", comments: "" });
+    setForm({
+      pickup: "",
+      drop: "",
+      priority: "medium",
+      comments: "",
+    });
   };
 
   return (
@@ -47,42 +67,71 @@ export default function TaskAllocation() {
 
         <form onSubmit={handleSubmit} className="space-y-4">
           <div className="grid grid-cols-2 gap-4">
-            <input
-              type="text"
-              name="pickup"
-              value={form.pickup}
-              onChange={handleChange}
-              placeholder="Pickup Location"
-              className="p-3 rounded bg-slate-800 text-white outline-none focus:ring-2 focus:ring-indigo-500"
-            />
+            <div>
+              <input
+                type="text"
+                name="pickup"
+                value={form.pickup}
+                onChange={handleChange}
+                placeholder="Pickup Location"
+                className={`w-full p-3 rounded bg-slate-800 text-white outline-none focus:ring-2 ${
+                  errors.pickup
+                    ? "border border-red-500 focus:ring-red-500"
+                    : "focus:ring-indigo-500"
+                }`}
+              />
+              {errors.pickup && (
+                <p className="text-red-400 text-xs mt-1">{errors.pickup}</p>
+              )}
+            </div>
 
-            <input
-              type="text"
-              name="drop"
-              value={form.drop}
-              onChange={handleChange}
-              placeholder="Drop Location"
-              className="p-3 rounded bg-slate-800 text-white outline-none focus:ring-2 focus:ring-indigo-500"
-            />
+            <div>
+              <input
+                type="text"
+                name="drop"
+                value={form.drop}
+                onChange={handleChange}
+                placeholder="Drop Location"
+                className={`w-full p-3 rounded bg-slate-800 text-white outline-none focus:ring-2 ${
+                  errors.drop
+                    ? "border border-red-500 focus:ring-red-500"
+                    : "focus:ring-indigo-500"
+                }`}
+              />
+              {errors.drop && (
+                <p className="text-red-400 text-xs mt-1">{errors.drop}</p>
+              )}
+            </div>
           </div>
 
-          <select
-            name="priority"
-            value={form.priority}
-            onChange={handleChange}
-            className="w-full p-3 rounded bg-slate-800 text-white outline-none"
-          >
-            <option value="low">Low Priority</option>
-            <option value="medium">Medium Priority</option>
-            <option value="high">High Priority</option>
-          </select>
+          <div>
+            <select
+              name="priority"
+              value={form.priority}
+              onChange={handleChange}
+              className={`w-full p-3 rounded bg-slate-800 text-white outline-none focus:ring-2 ${
+                errors.priority
+                  ? "border border-red-500 focus:ring-red-500"
+                  : "focus:ring-indigo-500"
+              }`}
+            >
+              <option value="">Select Priority</option>
+              <option value="low">Low Priority</option>
+              <option value="medium">Medium Priority</option>
+              <option value="high">High Priority</option>
+            </select>
+
+            {errors.priority && (
+              <p className="text-red-400 text-xs mt-1">{errors.priority}</p>
+            )}
+          </div>
 
           <textarea
             name="comments"
             value={form.comments}
             onChange={handleChange}
             placeholder="Operator Notes (Optional)"
-            className="w-full p-3 rounded bg-slate-800 text-white outline-none"
+            className="w-full p-3 rounded bg-slate-800 text-white outline-none focus:ring-2 focus:ring-indigo-500"
           />
 
           <button

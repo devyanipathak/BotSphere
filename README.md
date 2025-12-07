@@ -48,7 +48,7 @@ The application must work **without a real backend**, using simulated data and g
 - Premium branded UI with BotSphere branding
 
 📸 **Screenshot:**  
-`![Auth Page](./screens/auth.png)`
+`![Auth Page](https://github.com/devyanipathak/BotSphere/blob/main/screens/auth.png)`
 
 ---
 
@@ -64,7 +64,7 @@ The application must work **without a real backend**, using simulated data and g
 - Real-time values derived from global state
 
 📸 **Screenshot:**  
-`![Dashboard](./screens/dashboard.png)`
+`![Dashboard](https://github.com/devyanipathak/BotSphere/blob/main/screens/dashboard.png)`
 
 ---
 
@@ -81,7 +81,7 @@ The application must work **without a real backend**, using simulated data and g
 - Live telemetry simulation
 
 📸 **Screenshot:**  
-`![Bot Status](./screens/bots.png)`
+`![Bot Status](https://github.com/devyanipathak/BotSphere/blob/main/screens/bots.png)`
 
 ---
 
@@ -95,7 +95,7 @@ The application must work **without a real backend**, using simulated data and g
 - Tasks added directly to the global task queue
 
 📸 **Screenshot:**  
-`![Task Allocation](./screens/task-allocation.png)`
+`![Task Allocation](https://github.com/devyanipathak/BotSphere/blob/main/screens/task-allocation.png)`
 
 ---
 
@@ -108,7 +108,7 @@ The application must work **without a real backend**, using simulated data and g
 - Live "queue processing" simulation
 
 📸 **Screenshot:**  
-`![Task Queue](./screens/task-queue.png)`
+`![Task Queue](https://github.com/devyanipathak/BotSphere/blob/main/screens/task-queue.png)`
 
 ---
 
@@ -129,7 +129,7 @@ The application must work **without a real backend**, using simulated data and g
 | 🔴 Red | Error / Fault |
 
 📸 **Screenshot:**  
-`![Analytics](./screens/analytics.png)`
+`![Analytics](https://github.com/devyanipathak/BotSphere/blob/main/screens/analytics.png)`
 
 ---
 
@@ -142,7 +142,7 @@ The application must work **without a real backend**, using simulated data and g
 - Live movement every 2 seconds
 
 📸 **Screenshot:**  
-`![Warehouse Map](./screens/map.png)`
+`![Warehouse Map](https://github.com/devyanipathak/BotSphere/blob/main/screens/maps.png)`
 
 ---
 
