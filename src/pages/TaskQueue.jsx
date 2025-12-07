@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { removeOldestTask } from "../features/tasks/taskSlice";
 
@@ -12,28 +12,45 @@ export default function TaskQueue() {
   const dispatch = useDispatch();
   const tasks = useSelector((state) => state.tasks.pendingTasks);
 
-//   Auto-remove one task every 3 seconds
-    useEffect(() => {
-      const interval = setInterval(() => {
-        dispatch(removeOldestTask());
-      }, 3000);
+  const [countdown, setCountdown] = useState(3);
 
-      return () => clearInterval(interval);
-    }, [dispatch]);
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setCountdown((prev) => (prev === 1 ? 3 : prev - 1));
+    }, 1000);
+
+    const dequeueInterval = setInterval(() => {
+      dispatch(removeOldestTask());
+    }, 3000);
+
+    return () => {
+      clearInterval(interval);
+      clearInterval(dequeueInterval);
+    };
+  }, [dispatch]);
+
+  const sortedTasks = [...tasks].sort((a, b) =>
+    a.priority === "high" ? -1 : 1
+  );
 
   return (
-    <div className="p-6">
-      <h1 className="text-2xl font-bold mb-6">Task Queue</h1>
+    <div className="p-6 space-y-6 animate-fade-in">
+      <div className="flex justify-between items-center">
+        <div>
+          <h1 className="text-2xl font-bold">Live Task Queue</h1>
+        </div>
+        <span className="px-3 py-1 rounded bg-indigo-500 text-xs">LIVE</span>
+      </div>
 
       <div className="space-y-4 max-w-3xl">
-        {tasks.length === 0 && (
+        {sortedTasks.length === 0 && (
           <p className="text-slate-400">No pending tasks</p>
         )}
 
-        {tasks.map((task) => (
+        {sortedTasks.map((task) => (
           <div
             key={task.id}
-            className="bg-slate-900 p-4 rounded-xl shadow border border-slate-800 flex justify-between items-center"
+            className="bg-slate-900 p-4 rounded-xl border border-slate-800 flex justify-between items-center hover:scale-[1.01] transition"
           >
             <div>
               <p className="font-semibold text-white">

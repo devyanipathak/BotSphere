@@ -36,7 +36,6 @@ export default function AuthPage() {
       dispatch(login({ email: form.email }));
       navigate("/dashboard");
     } else {
-      // Simulated signup
       setSuccess("Signup successful! You can now login.");
       setIsLogin(true);
       setForm({ name: "", email: "", password: "" });
@@ -46,8 +45,6 @@ export default function AuthPage() {
   return (
     <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-slate-950 to-slate-900 text-slate-100">
       <div className="bg-slate-900 p-8 rounded-2xl w-[360px] shadow-2xl border border-slate-800 animate-fade-in">
-        
-        {/* Logo & Branding */}
         <div className="text-center mb-6">
           <div className="text-4xl mb-2">🤖</div>
           <h1 className="text-2xl font-bold tracking-wide">BotSphere</h1>
@@ -56,7 +53,6 @@ export default function AuthPage() {
           </p>
         </div>
 
-        {/* Toggle */}
         <div className="flex mb-6 bg-slate-800 rounded-lg overflow-hidden">
           <button
             onClick={() => {
@@ -88,7 +84,6 @@ export default function AuthPage() {
           </button>
         </div>
 
-        {/* Alerts */}
         {error && (
           <p className="text-red-400 text-sm mb-3 text-center animate-shake">
             {error}
@@ -101,7 +96,6 @@ export default function AuthPage() {
           </p>
         )}
 
-        {/* Form */}
         <form onSubmit={handleSubmit} className="space-y-4">
           {!isLogin && (
             <input
@@ -139,10 +133,6 @@ export default function AuthPage() {
             {isLogin ? "Login to BotSphere" : "Create BotSphere Account"}
           </button>
         </form>
-
-        <p className="text-xs text-center text-slate-400 mt-5">
-          * Authentication is simulated for assignment demo
-        </p>
       </div>
     </div>
   );
